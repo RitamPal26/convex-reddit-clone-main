@@ -5,7 +5,7 @@ pipeline {
         nodejs 'node16'
     }
     environment {
-        SCANNER_HOME = tool 'sonar-scanner'
+        SCANNER_HOME = tool 'sonarqube'
         APP_NAME     = "reddit-clone-pipeline"
         RELEASE      = "1.0.0"
         DOCKER_USER  = "ritam26"
@@ -35,7 +35,7 @@ pipeline {
         stage("Quality Gate") {
             steps {
                 script {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'sonarqube'
+                    waitForQualityGate abortPipeline: false, credentialsId: 'sonarqube-token'
                 }
             }
         }
